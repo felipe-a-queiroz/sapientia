@@ -1,12 +1,35 @@
-# React + Vite
+## Sapientia
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Sapientia é uma aplicação web desenvolvida em React, utilizando Vite para build e desenvolvimento rápido. O projeto implementa autenticação de usuários via JWT e navegação entre páginas utilizando React Router.
 
-Currently, two official plugins are available:
+### Funcionalidades
+- Autenticação de usuários com JWT
+- Contexto global de autenticação (`AuthContext`)
+- Rotas protegidas e públicas
+- Páginas de Login e Home
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Tecnologias Utilizadas
+- [React](https://react.dev/)
+- [Vite](https://vitejs.dev/)
+- [React Router DOM](https://reactrouter.com/)
+- [Axios](https://axios-http.com/)
+- [jwt-decode](https://github.com/auth0/jwt-decode)
 
-## Expanding the ESLint configuration
+### Como rodar o projeto
+1. Instale as dependências:
+   ```bash
+   npm install
+   ```
+2. Inicie o servidor de desenvolvimento:
+   ```bash
+   npm run dev
+   ```
+3. Acesse `http://localhost:5173` no navegador.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Estrutura de Pastas
+- `src/pages` — Páginas principais (Home, Login)
+- `src/contexts` — Contextos globais (ex: autenticação)
+- `src/routes` — Definição das rotas da aplicação
+
+---
+Projeto inicial para autenticação e navegação em React.
