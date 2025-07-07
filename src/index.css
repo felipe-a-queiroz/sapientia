@@ -1,25 +1,29 @@
+@import "tailwindcss";
+
+
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
+  color: #22223b;
+  background-color: #f8f9fa;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+
+
 a {
   font-weight: 500;
-  color: #646cff;
+  color: #4f8cff;
   text-decoration: inherit;
+  transition: color 0.2s;
 }
 a:hover {
-  color: #535bf2;
+  color: #3a5ccc;
 }
 
 body {
@@ -28,41 +32,66 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%);
 }
 
+
 h1 {
-  font-size: 3.2em;
+  font-size: 2.8em;
   line-height: 1.1;
+  color: #2563eb; /* Tailwind blue-600 */
+  font-weight: 700;
+  letter-spacing: -1px;
+  text-shadow: 0 2px 8px rgba(37, 99, 235, 0.08);
 }
 
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
+  border-radius: 0.5rem;
+  border: none;
+  padding: 0.6em 1.5em;
   font-size: 1em;
-  font-weight: 500;
+  font-weight: 600;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background: linear-gradient(90deg, #06b6d4 0%, #6366f1 100%); /* cyan-500 to indigo-500 */
+  color: #fff;
+  box-shadow: 0 2px 8px 0 rgba(6, 182, 212, 0.08);
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: background 0.2s, box-shadow 0.2s;
 }
 button:hover {
-  border-color: #646cff;
+  background: linear-gradient(90deg, #0ea5e9 0%, #7c3aed 100%); /* sky-500 to violet-600 */
+  box-shadow: 0 4px 16px 0 rgba(99, 102, 241, 0.12);
 }
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  outline: 3px solid #a5b4fc;
+  outline-offset: 2px;
 }
 
-@media (prefers-color-scheme: light) {
+
+@media (prefers-color-scheme: dark) {
   :root {
-    color: #213547;
-    background-color: #ffffff;
+    color: #e0e7ff;
+    background-color: #181a2a;
+  }
+  body {
+    background: linear-gradient(135deg, #181a2a 0%, #232946 100%);
+  }
+  h1 {
+    color: #38bdf8; /* sky-400 */
+    text-shadow: 0 2px 8px rgba(56, 189, 248, 0.12);
+  }
+  a {
+    color: #a5b4fc;
   }
   a:hover {
-    color: #747bff;
+    color: #c7d2fe;
   }
   button {
-    background-color: #f9f9f9;
+    background: linear-gradient(90deg, #818cf8 0%, #06b6d4 100%); /* indigo-400 to cyan-500 */
+    color: #fff;
+  }
+  button:hover {
+    background: linear-gradient(90deg, #38bdf8 0%, #6366f1 100%); /* sky-400 to indigo-500 */
   }
 }
