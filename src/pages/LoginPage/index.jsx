@@ -1,7 +1,11 @@
+
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { loginUser } from '../../api';
+import AuthCard from '../../components/Login/AuthCard';
+import LoginForm from '../../components/Login/LoginForm';
+
 
 function LoginPage() {
   const [username, setUsername] = useState('');
@@ -17,9 +21,7 @@ function LoginPage() {
     e.preventDefault();
     setError('');
     setIsLoading(true);
-
     try {
-      // A API deve retornar um objeto com a propriedade 'token'
       const data = await loginUser({ username, password });
       if (data.token) {
         login(data.token);
@@ -35,54 +37,20 @@ function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-slate-100 font-sans">
-      <div className="bg-white p-8 rounded-xl shadow-xl w-full max-w-md">
-        <h1 className="text-3xl font-bold mb-6 text-center text-slate-800">
-          Bem-vindo ao Sapientia
-        </h1>
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div>
-            <label
-              htmlFor="username"
-              className="block text-sm font-semibold text-slate-700"
-            >
-              Usuário
-            </label>
-            <input
-              id="username"
-              type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              className="mt-1 block w-full px-4 py-2 bg-slate-50 border border-slate-300 rounded-lg shadow-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500 sm:text-sm"
-              required
-            />
-          </div>
-          <div>
-            <label
-              htmlFor="password"
-              className="block text-sm font-semibold text-slate-700"
-            >
-              Senha
-            </label>
-            <input
-              id="password"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="mt-1 block w-full px-4 py-2 bg-slate-50 border border-slate-300 rounded-lg shadow-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500 sm:text-sm"
-              required
-            />
-          </div>
-          {error && <p className="text-red-500 text-sm text-center">{error}</p>}
-          <button
-            type="submit"
-            disabled={isLoading}
-            className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-lg text-sm font-bold text-white bg-gradient-to-r from-sky-500 to-cyan-500 hover:from-sky-600 hover:to-cyan-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500 disabled:bg-slate-400 disabled:from-slate-400 disabled:to-slate-400 disabled:cursor-not-allowed transition-all duration-300"
-          >
-            {isLoading ? 'Entrando...' : 'Entrar'}
-          </button>
-        </form>
-      </div>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-900 via-sky-800 to-cyan-700 font-sans">
+      <AuthCard>
+        <h1 className="text-4xl font-extrabold mb-2 text-center text-slate-800 tracking-tight drop-shadow">Sapientia</h1>
+        <p className="text-center text-slate-500 mb-8 text-base">Acesse sua conta para continuar</p>
+        <LoginForm
+          username={username}
+          setUsername={setUsername}
+          password={password}
+          setPassword={setPassword}
+          error={error}
+          isLoading={isLoading}
+          onSubmit={handleSubmit}
+        />
+      </AuthCard>
     </div>
   );
 }
