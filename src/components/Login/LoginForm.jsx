@@ -1,4 +1,5 @@
 import React from 'react';
+import '../../pages/LoginPage/LoginPage.css'; 
 
 function LoginForm({ username, setUsername, password, setPassword, error, isLoading, onSubmit }) {
   return (
@@ -39,14 +40,16 @@ function LoginForm({ username, setUsername, password, setPassword, error, isLoad
           <span className="font-semibold">{error}</span>
         </div>
       )}
-      <button
-        type="submit"
-        disabled={isLoading}
-        className="w-full py-3 mt-2 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-700 text-white font-bold text-lg shadow-lg hover:from-cyan-700 hover:to-blue-800 hover:shadow-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-cyan-400 disabled:opacity-60 disabled:cursor-not-allowed relative overflow-hidden group"
-      >
-        <span className="absolute left-0 top-0 w-full h-full bg-white/10 opacity-0 group-hover:opacity-100 transition-all duration-300 blur-sm" />
-        <span className="relative z-10">{isLoading ? 'Entrando...' : 'Entrar'}</span>
-      </button>
+      <div className="LoginForm-button-center">
+        <button
+          type="submit"
+          disabled={isLoading}
+          className="w-full py-3 mt-2 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-700 text-white font-bold text-lg shadow-lg hover:from-cyan-700 hover:to-blue-800 hover:shadow-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-cyan-400 disabled:opacity-60 disabled:cursor-not-allowed relative overflow-hidden group"
+        >
+          <span className="absolute left-0 top-0 w-full h-full bg-white/10 opacity-0 group-hover:opacity-100 transition-all duration-300 blur-sm" />
+          <span className="relative z-10">{isLoading ? 'Entrando...' : 'Entrar'}</span>
+        </button>
+      </div>
     </form>
   );
 }

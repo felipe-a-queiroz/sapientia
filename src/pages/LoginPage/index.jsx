@@ -1,10 +1,10 @@
-
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { loginUser } from '../../api';
 import AuthCard from '../../components/Login/AuthCard';
 import LoginForm from '../../components/Login/LoginForm';
+import './LoginPage.css'; 
 
 
 function LoginPage() {
@@ -37,10 +37,10 @@ function LoginPage() {
   };
 
   return (
-    <div className="">
+    <div className="LoginPage-center">
       <AuthCard>
-        <h1 className="">Sapientia</h1>
-        <p className="">Acesse sua conta para continuar</p>
+        <h1 className="AuthCard-title">Sapientia</h1>
+        <p className="AuthCard-desc">Acesse sua conta para continuar</p>
         <LoginForm
           username={username}
           setUsername={setUsername}

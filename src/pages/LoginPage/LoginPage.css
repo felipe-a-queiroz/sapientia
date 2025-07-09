@@ -1,0 +1,28 @@
+/* Centraliza o AuthCard na tela */
+body,
+#root,
+.LoginPage-center {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Caso queira aplicar apenas na página de login, use uma classe wrapper */
+.LoginPage-center {
+  width: 100vw;
+  height: 100vh;
+  background: transparent;
+}
+
+.AuthCard-title,
+.AuthCard-desc {
+  text-align: center;
+  width: 100%;
+}
+
+.LoginForm-button-center {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}

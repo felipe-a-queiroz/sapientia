@@ -13,8 +13,13 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
   scroll-behavior: smooth;
+  font-size: 16px;
+  /* Adiciona espaçamento base para responsividade */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 3rem;
 }
 
 * {
@@ -30,6 +35,9 @@ body {
   background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%);
   display: flex;
   place-items: center;
+  padding: var(--space-sm);
+  /* Melhora responsividade em telas pequenas */
+  box-sizing: border-box;
 }
 
 /* ---------- Tipografia ---------- */
@@ -41,15 +49,26 @@ h1 {
   font-weight: 700;
   letter-spacing: -1px;
   text-shadow: 0 2px 8px rgba(37, 99, 235, 0.08);
+  margin-bottom: var(--space-md);
+  /* Melhora responsividade */
+  word-break: break-word;
 }
 
 a {
   font-weight: 500;
   color: #4f8cff;
   text-decoration: inherit;
+  border-radius: 0.25rem;
+  outline: none;
+  transition: color 0.2s, background 0.2s;
 }
-a:hover {
+a:hover,
+a:focus-visible {
   color: #3a5ccc;
+  background: #e0e7ff33;
+  text-decoration: underline;
+  outline: 2px solid #a5b4fc;
+  outline-offset: 2px;
 }
 
 /* ---------- Botões ---------- */
@@ -61,14 +80,20 @@ button {
   font-size: 1em;
   font-weight: 600;
   font-family: inherit;
-  background: linear-gradient(90deg, #06b6d4 0%, #6366f1 100%); /* cyan to indigo */
+  background: linear-gradient(90deg, #06b6d4 0%, #6366f1 100%);
   color: #fff;
-  box-shadow: 0 2px 8px 0 rgba(6, 182, 212, 0.08);
+  box-shadow: 0 2px 8px 0 rgba(6, 182, 212, 0.10);
   cursor: pointer;
+  min-width: 120px;
+  min-height: 44px;
+  letter-spacing: 0.02em;
+  transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
 }
-button:hover {
+button:hover,
+button:focus-visible {
   background: linear-gradient(90deg, #0ea5e9 0%, #7c3aed 100%);
   box-shadow: 0 4px 16px 0 rgba(99, 102, 241, 0.12);
+  transform: translateY(-2px) scale(1.03);
 }
 button:focus,
 button:focus-visible {
@@ -83,33 +108,23 @@ select,
 textarea {
   padding: 0.75em 1em;
   border-radius: 0.5rem;
-  border: 1px solid #cbd5e1; /* slate-300 */
+  border: 1px solid #cbd5e1;
   font-size: 1rem;
   background-color: #fff;
-  color: #1e293b; /* slate-800 */
+  color: #1e293b;
   font-family: inherit;
   transition: all 0.2s ease;
+  margin-bottom: var(--space-xs);
+  box-sizing: border-box;
+  box-shadow: 0 1px 2px 0 rgba(99, 102, 241, 0.04);
 }
-
 input:focus,
 select:focus,
 textarea:focus {
-  border-color: #6366f1; /* indigo-500 */
+  border-color: #6366f1;
   box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3);
   outline: none;
-}
-
-/* ---------- Cartão (card) ---------- */
-
-.card {
-  background-color: #ffffff;
-  border-radius: 1rem;
-  padding: 2rem;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05);
-  transition: box-shadow 0.3s ease;
-}
-.card:hover {
-  box-shadow: 0 6px 32px rgba(0, 0, 0, 0.08);
+  background-color: #f1f5f9;
 }
 
 /* ---------- Utilitários ---------- */
@@ -118,6 +133,7 @@ textarea:focus {
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: var(--space-sm);
 }
 
 .fade-in {
@@ -165,6 +181,9 @@ svg {
   display: inline-block;
   vertical-align: middle;
   transition: transform 0.2s ease;
+  color: inherit;
+  /* Melhora acessibilidade */
+  focusable: false;
 }
 svg:hover {
   transform: scale(1.05);
@@ -176,30 +195,43 @@ svg:hover {
   :root {
     color: #e0e7ff;
     background-color: #181a2a;
+    --space-xs: 0.5rem;
+    --space-sm: 1rem;
+    --space-md: 2rem;
+    --space-lg: 3rem;
   }
 
   body {
     background: linear-gradient(135deg, #181a2a 0%, #232946 100%);
+    box-sizing: border-box;
   }
 
   h1 {
-    color: #38bdf8; /* sky-400 */
+    color: #38bdf8;
     text-shadow: 0 2px 8px rgba(56, 189, 248, 0.12);
+    margin-bottom: var(--space-md);
   }
 
   a {
     color: #a5b4fc;
+    background: transparent;
   }
-  a:hover {
+  a:hover,
+  a:focus-visible {
     color: #c7d2fe;
+    background: #33415555;
+    outline: 2px solid #818cf8;
   }
 
   button {
     background: linear-gradient(90deg, #818cf8 0%, #06b6d4 100%);
     color: #fff;
+    box-shadow: 0 2px 8px 0 rgba(129, 140, 248, 0.10);
   }
-  button:hover {
+  button:hover,
+  button:focus-visible {
     background: linear-gradient(90deg, #38bdf8 0%, #6366f1 100%);
+    transform: translateY(-2px) scale(1.03);
   }
 
   input,
@@ -207,15 +239,17 @@ svg:hover {
   textarea {
     background-color: #1e1e2f;
     color: #e0e7ff;
-    border-color: #334155; /* slate-700 */
+    border-color: #334155;
+    box-shadow: 0 1px 2px 0 rgba(129, 140, 248, 0.04);
+  }
+  input:focus,
+  select:focus,
+  textarea:focus {
+    background-color: #232946;
   }
 
   ::-webkit-scrollbar-thumb {
     background-color: #475569;
   }
-
-  .card {
-    background-color: #1e1e2f;
-    color: #f1f5f9;
-  }
 }
+
