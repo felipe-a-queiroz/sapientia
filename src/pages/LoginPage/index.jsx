@@ -37,10 +37,10 @@ function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-900 via-sky-800 to-cyan-700 font-sans">
+    <div className="">
       <AuthCard>
-        <h1 className="text-4xl font-extrabold mb-2 text-center text-slate-800 tracking-tight drop-shadow">Sapientia</h1>
-        <p className="text-center text-slate-500 mb-8 text-base">Acesse sua conta para continuar</p>
+        <h1 className="">Sapientia</h1>
+        <p className="">Acesse sua conta para continuar</p>
         <LoginForm
           username={username}
           setUsername={setUsername}

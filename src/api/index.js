@@ -28,5 +28,13 @@ export const loginUser = async (credentials) => {
   }
 };
 
+export const logoutUser = async () => {
+  try {
+    await api.post('/logout');
+  } catch (error) {
+    throw error.response?.data || { message: 'Ocorreu um erro ao realizar logout.' };
+  }
+};
+
 export default api;
 
