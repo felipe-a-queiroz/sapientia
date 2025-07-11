@@ -1,17 +1,11 @@
 import './Header.css';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { useCallback, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useCallback } from 'react';
 import { logoutUser } from '../../api';
 import { Menu, X } from 'lucide-react'; // Ícones para o menu móvel
 
-const navLinks = [
-  { name: 'Home', path: '/' },
-  { name: 'Usuários', path: '/usuarios' },
-];
 
 const Header = () => {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const location = useLocation();
   const navigate = useNavigate();
 
   const handleLogout = useCallback(async () => {
