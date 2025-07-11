@@ -27,17 +27,47 @@
 }
 
 /* ---------- Corpo e layout ---------- */
-
 body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
   background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%);
-  display: flex;
-  place-items: center;
-  padding: var(--space-sm);
-  /* Melhora responsividade em telas pequenas */
   box-sizing: border-box;
+  /* Removido o padding e o alinhamento central para o header ocupar o topo e 100% da largura */
+}
+
+/* Garante que o app ocupe toda a largura e o header fique no topo */
+#root, .app {
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 1 0%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+/* ---------- Header ---------- */
+header {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 50;
+  background-color: #1e293b; /* gray-800 */
+  color: #e2e8f0; /* gray-200 */
+  box-shadow: 0 2px 8px rgba(30, 41,
+  59, 0.1);
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: 'Segoe UI', 'Roboto', 'Arial', sans-serif;
 }
 
 /* ---------- Tipografia ---------- */
@@ -183,7 +213,6 @@ svg {
   transition: transform 0.2s ease;
   color: inherit;
   /* Melhora acessibilidade */
-  focusable: false;
 }
 svg:hover {
   transform: scale(1.05);

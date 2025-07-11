@@ -1,18 +1,15 @@
-import { logoutUser } from "../../api";
-import { useCallback } from "react";
+import Header from "../../components/header";
+import Footer from "../../components/footer";
 
 function HomePage() {
-  const handleLogout = useCallback(async () => {
-    await logoutUser();
-    localStorage.removeItem("authToken");
-    window.location.href = "/login";
-  }, []);
-
   return (
-    <div>
-      <h1>Página Inicial</h1>
-      <button onClick={handleLogout}>Logout</button>
-    </div>
+    <>
+      <Header />
+      <main>
+        Você está logado
+      </main>
+      <Footer />
+    </>
   );
 }
 
