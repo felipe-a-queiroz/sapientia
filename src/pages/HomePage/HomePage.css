@@ -1,0 +1,16 @@
+.page-content {
+    flex-grow: 1;
+    padding: 1.5rem;
+    overflow-y: auto;
+}
+
+.home-page-content {
+    display: flex;
+    flex-grow: 1;
+}
+
+.page-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}

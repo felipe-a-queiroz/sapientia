@@ -1,4 +1,4 @@
-import "./styles.css"
+import './Footer.css';
 const Footer = () => {
     const year = new Date().getFullYear();
     return (
@@ -8,6 +8,6 @@ const Footer = () => {
             </div>
         </footer>
     );
-}
+};
 
 export default Footer;

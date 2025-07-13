@@ -1,0 +1,314 @@
+@import 'tailwindcss';
+
+/* ---------- Variáveis e estilo base ---------- */
+
+:root {
+    font-family:
+        -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue',
+        Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
+    color-scheme: light dark;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+    font-size: 16px;
+    /* Adiciona espaçamento base para responsividade */
+    --space-xs: 0.5rem;
+    --space-sm: 1rem;
+    --space-md: 2rem;
+    --space-lg: 3rem;
+
+    /* Cores do Light Mode (Padrão) */
+    --color-primary: #1877f2;
+    --color-primary-hover: #166fe5;
+    --color-secondary-hover: #f0f2f5;
+    --color-background: #f0f2f5;
+    --color-surface: #ffffff;
+    --color-text-primary: #1c1e21;
+    --color-text-on-primary: #ffffff;
+    --color-border: #d1d5db;
+    --color-button-secondary-text: #374151;
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+* {
+    transition:
+        color 0.2s ease,
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+/* ---------- Corpo e layout ---------- */
+body {
+    background-color: var(--color-background);
+    color: var(--color-text-primary);
+    margin: 0;
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease;
+}
+
+#root,
+.app {
+    width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 1 0%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
+}
+
+/* ---------- Tipografia ---------- */
+
+h1 {
+    font-size: clamp(2.25rem, 5vw, 2.8rem);
+    line-height: 1.1;
+    color: #2563eb; /* blue-600 */
+    font-weight: 700;
+    letter-spacing: -1px;
+    text-shadow: 0 2px 8px rgba(37, 99, 235, 0.08);
+    margin-bottom: var(--space-md);
+    /* Melhora responsividade */
+    word-break: break-word;
+}
+
+a {
+    font-weight: 500;
+    color: #4f8cff;
+    text-decoration: inherit;
+    border-radius: 0.25rem;
+    outline: none;
+    transition:
+        color 0.2s,
+        background 0.2s;
+}
+a:hover,
+a:focus-visible {
+    color: #3a5ccc;
+    background: #e0e7ff33;
+    text-decoration: underline;
+    outline: 2px solid #a5b4fc;
+    outline-offset: 2px;
+}
+
+/* ---------- Botões ---------- */
+
+button {
+    border-radius: 0.5rem;
+    border: none;
+    padding: 0.6em 1.5em;
+    font-size: 1em;
+    font-weight: 600;
+    font-family: inherit;
+    background: linear-gradient(90deg, #06b6d4 0%, #6366f1 100%);
+    color: #fff;
+    box-shadow: 0 2px 8px 0 rgba(6, 182, 212, 0.1);
+    cursor: pointer;
+    min-width: 120px;
+    min-height: 44px;
+    letter-spacing: 0.02em;
+    transition:
+        background 0.2s,
+        box-shadow 0.2s,
+        transform 0.1s;
+}
+button:hover,
+button:focus-visible {
+    background: linear-gradient(90deg, #0ea5e9 0%, #7c3aed 100%);
+    box-shadow: 0 4px 16px 0 rgba(99, 102, 241, 0.12);
+    transform: translateY(-2px) scale(1.03);
+}
+button:focus,
+button:focus-visible {
+    outline: 3px solid #a5b4fc;
+    outline-offset: 2px;
+}
+
+/* ---------- Inputs e formulários ---------- */
+
+input,
+select,
+textarea {
+    padding: 0.75em 1em;
+    border-radius: 0.5rem;
+    border: 1px solid #cbd5e1;
+    font-size: 1rem;
+    background-color: #fff;
+    color: #1e293b;
+    font-family: inherit;
+    transition: all 0.2s ease;
+    margin-bottom: var(--space-xs);
+    box-sizing: border-box;
+    box-shadow: 0 1px 2px 0 rgba(99, 102, 241, 0.04);
+}
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3);
+    outline: none;
+    background-color: #f1f5f9;
+}
+
+/* ---------- Utilitários ---------- */
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.fade-in {
+    animation: fadeIn 0.4s ease-out both;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-shake {
+    animation: shake 0.4s ease-in-out;
+}
+
+@keyframes shake {
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-4px);
+    }
+    50% {
+        transform: translateX(4px);
+    }
+    75% {
+        transform: translateX(-4px);
+    }
+}
+
+/* ---------- Scrollbar personalizada ---------- */
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background-color: #cbd5e1;
+    border-radius: 8px;
+}
+
+/* ---------- Ícones SVG ---------- */
+
+svg {
+    display: inline-block;
+    vertical-align: middle;
+    transition: transform 0.2s ease;
+    color: inherit;
+    /* Melhora acessibilidade */
+}
+svg:hover {
+    transform: scale(1.05);
+}
+
+/* ---------- Dark Mode ---------- */
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        background-color: #181a2a;
+        --space-xs: 0.5rem;
+        --space-sm: 1rem;
+        --space-md: 2rem;
+        --space-lg: 3rem;
+
+        /* Cores do Dark Mode */
+        --color-primary: #2d88ff;
+        --color-primary-hover: #4294ff;
+        --color-background: #18191a;
+        --color-surface: #242526;
+        --color-text-primary: #e4e6eb;
+        --color-secondary-hover: #3a3b3c;
+        --color-border: #4b4c4f;
+        --color-button-secondary-text: #e4e6eb;
+        --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    body {
+        background: linear-gradient(135deg, #181a2a 0%, #232946 100%);
+        color: var(--color-text-primary);
+        margin: 0;
+        transition:
+            background-color 0.2s ease,
+            color 0.2s ease;
+    }
+
+    main {
+        background: linear-gradient(135deg, #181a2a 0%, #232946 100%);
+    }
+
+    h1 {
+        color: #38bdf8;
+        text-shadow: 0 2px 8px rgba(56, 189, 248, 0.12);
+        margin-bottom: var(--space-md);
+    }
+
+    a {
+        color: #a5b4fc;
+        background: transparent;
+    }
+    a:hover,
+    a:focus-visible {
+        color: #c7d2fe;
+        background: #33415555;
+        outline: 2px solid #818cf8;
+    }
+
+    button {
+        background: linear-gradient(90deg, #818cf8 0%, #06b6d4 100%);
+        color: #fff;
+        box-shadow: 0 2px 8px 0 rgba(129, 140, 248, 0.1);
+    }
+    button:hover,
+    button:focus-visible {
+        background: linear-gradient(90deg, #38bdf8 0%, #6366f1 100%);
+        transform: translateY(-2px) scale(1.03);
+    }
+
+    input,
+    select,
+    textarea {
+        background-color: #1e1e2f;
+        color: #e0e7ff;
+        border-color: #334155;
+        box-shadow: 0 1px 2px 0 rgba(129, 140, 248, 0.04);
+    }
+    input:focus,
+    select:focus,
+    textarea:focus {
+        background-color: #232946;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background-color: #475569;
+    }
+}

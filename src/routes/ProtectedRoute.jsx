@@ -8,13 +8,12 @@ import { useAuth } from '../contexts/AuthContext';
  *   página que o usuário tentou acessar para redirecioná-lo de volta após o login.
  */
 export function ProtectedRoute({ children }) {
-  const { isAuthenticated } = useAuth();
-  const location = useLocation();
+    const { isAuthenticated } = useAuth();
+    const location = useLocation();
 
-  if (!isAuthenticated) {
-    return <Navigate to="/login" state={{ from: location }} replace />;
-  }
+    if (!isAuthenticated) {
+        return <Navigate to="/login" state={{ from: location }} replace />;
+    }
 
-  return children;
+    return children;
 }
-
