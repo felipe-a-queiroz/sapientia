@@ -5,6 +5,8 @@ import HomePage from '../pages/HomePage';
 import LoginPage from '../pages/LoginPage';
 import SettingsPage from '../pages/SettingsPage';
 import { ProtectedRoute } from './ProtectedRoute';
+import { AdminRoute } from './AdminRoute';
+import ManageUsersPage from '../pages/ManageUsersPage';
 
 function Logout() {
     React.useEffect(() => {
@@ -38,6 +40,10 @@ export function AppRoutes() {
                         </ProtectedRoute>
                     }
                 />
+                <Route element={<AdminRoute />}>
+                    <Route path="/admin/users" element={<ManageUsersPage />} />
+                    {/* Outras rotas de admin podem ser adicionadas aqui */}
+                </Route>
                 <Route
                     path="/settings"
                     element={

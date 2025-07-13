@@ -22,11 +22,12 @@ function LoginPage() {
         setIsLoading(true);
         try {
             const data = await loginUser({ username, password });
-            if (data.token) {
-                login(data.token);
+            console.log('Login response:', data);
+            if (data.token && data.role) {
+                login(data.token, data.role);
                 navigate(from, { replace: true });
             } else {
-                setError('Token não recebido da API.');
+                setError('Token ou dados do usuário não recebidos da API.');
             }
         } catch (err) {
             setError(
