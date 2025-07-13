@@ -17,7 +17,7 @@ body, html {
 
 /* O card de autenticação */
 .AuthCard {
-  background-color: #ffffff;
+  background-color: var(--color-surface);
   padding: 40px;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -30,14 +30,14 @@ body, html {
 .AuthCard-title {
   font-size: 2.5rem;
   font-weight: 700;
-  color: #1c1e21;
+  color: var(--color-text-primary);
   margin-bottom: 10px;
 }
 
 /* Descrição abaixo do título */
 .AuthCard-desc {
   font-size: 1rem;
-  color: #606770;
+  color: var(--color-text-primary);
   margin-bottom: 30px;
 }
 
@@ -57,7 +57,7 @@ body, html {
   display: block;
   font-weight: 600;
   margin-bottom: 8px;
-  color: #333;
+  color: var(--color-text-primary);
 }
 
 .form-group input {
