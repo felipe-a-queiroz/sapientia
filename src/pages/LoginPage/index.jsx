@@ -2,9 +2,7 @@ import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { loginUser } from '../../api';
-import AuthCard from '../../components/Login/AuthCard';
-import LoginForm from '../../components/Login/LoginForm';
-import './LoginPage.css'; 
+import './styles.css'; 
 
 
 function LoginPage() {
@@ -38,19 +36,40 @@ function LoginPage() {
 
   return (
     <div className="LoginPage-center">
-      <AuthCard>
+      <div className="AuthCard">
         <h1 className="AuthCard-title">Sapientia</h1>
         <p className="AuthCard-desc">Acesse sua conta para continuar</p>
-        <LoginForm
-          username={username}
-          setUsername={setUsername}
-          password={password}
-          setPassword={setPassword}
-          error={error}
-          isLoading={isLoading}
-          onSubmit={handleSubmit}
-        />
-      </AuthCard>
+        <form className="LoginForm" onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label htmlFor="username">Usuário</label>
+            <input
+              id="username"
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              disabled={isLoading}
+              required
+              autoComplete="username"
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="password">Senha</label>
+            <input
+              id="password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              disabled={isLoading}
+              required
+              autoComplete="current-password"
+            />
+          </div>
+          {error && <p className="LoginForm-error">{error}</p>}
+          <button type="submit" className="LoginForm-button" disabled={isLoading}>
+            {isLoading ? 'Entrando...' : 'Entrar'}
+          </button>
+        </form>
+      </div>
     </div>
   );
 }

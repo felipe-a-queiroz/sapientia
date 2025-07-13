@@ -1,4 +1,4 @@
-import './Header.css';
+import './styles.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { useCallback } from 'react';
 import { logoutUser } from '../../api';
@@ -29,7 +29,7 @@ const Header = () => {
         
           <button
             onClick={handleLogout}
-            className="px-4 py-2 rounded-lg bg-red-600 hover:bg-red-700 transition-colors duration-200 text-white font-semibold focus:outline-none focus:ring-2 focus:ring-red-400"
+            className=""
             aria-label="Logout"
           >
             Logout
