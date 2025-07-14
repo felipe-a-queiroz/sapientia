@@ -4,7 +4,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import { loginUser } from '../../api';
 import './LoginPage.css';
 
-import Input from './Input';
+import Input from '../../components/forms/Input';
 
 function LoginPage() {
     const [username, setUsername] = useState('');
