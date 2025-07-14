@@ -7,12 +7,13 @@ import SettingsPage from '../pages/SettingsPage';
 import { ProtectedRoute } from './ProtectedRoute';
 import { AdminRoute } from './AdminRoute';
 import ManageUsersPage from '../pages/ManageUsersPage';
+import ProfilePage from '../pages/ProfilePage';
 
 function Logout() {
     React.useEffect(() => {
         const token = localStorage.getItem('token');
         if (token) {
-            fetch('/api/auth/logout', {
+            fetch(`${import.meta.env.VITE_API_URL}/auth/logout`, {
                 method: 'POST',
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -53,6 +54,14 @@ export function AppRoutes() {
                     }
                 />
                 <Route path="/login" element={<LoginPage />} />
+                <Route
+                    path="/profile"
+                    element={
+                        <ProtectedRoute>
+                            <ProfilePage />
+                        </ProtectedRoute>
+                    }
+                />
                 <Route path="/logout" element={<Logout />} />
             </Routes>
         </BrowserRouter>
