@@ -2,6 +2,11 @@
 
 > Sapientia is a modern web application built with React, focused on user authentication via JWT, protected navigation, and an agile development experience with Vite.
 
+<img width="1916" height="957" alt="image" src="https://github.com/user-attachments/assets/519e9aee-dc17-4e76-90d8-90c4bc48a8af" />
+<img width="1788" height="892" alt="image" src="https://github.com/user-attachments/assets/a1b922be-87d7-4d50-800f-dac32669e0e6" />
+
+
+
 ## Overview
 
 The Sapientia project implements a complete flow of authentication, session management, and navigation between protected and public pages. It uses React Context for global authentication control and React Router DOM for routing.
