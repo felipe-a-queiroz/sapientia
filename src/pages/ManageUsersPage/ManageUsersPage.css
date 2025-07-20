@@ -1,0 +1,9 @@
+.error-message {
+    color: red;
+    font-weight: bold;
+}
+
+.add-user-button {
+    align-self: flex-start; 
+    margin-bottom: 1.5rem;  
+}
