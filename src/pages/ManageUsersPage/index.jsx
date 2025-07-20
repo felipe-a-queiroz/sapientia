@@ -1,27 +1,32 @@
 import { useState, useEffect } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
 import './ManageUsersPage.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 import MainLayout from '../../components/layout';
 import UserTable from '../../components/UserTable';
 import UserModal from '../../components/UserModal';
+import ConfirmationModal from '../../components/ConfirmationModal';
 import { getUsers, deleteUser, createUser, updateUser } from '../../api';
 
 function ManageUsersPage() {
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
     const [users, setUsers] = useState([]);
 
+    const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
+    const [userToDelete, setUserToDelete] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [editingUser, setEditingUser] = useState(null);
 
     const fetchUsers = async () => {
         setLoading(true);
-        setError(null);
         try {
             const data = await getUsers();
             setUsers(data);
         } catch (err) {
-            setError('Falha ao carregar usuários. Tente novamente mais tarde.');
+            toast.error(
+                'Falha ao carregar usuários. Tente novamente mais tarde.'
+            );
             console.error(err);
         } finally {
             setLoading(false);
@@ -51,37 +56,51 @@ function ManageUsersPage() {
         try {
             if (editingUser) {
                 await updateUser(editingUser.id, userData);
+                toast.success('Usuário atualizado com sucesso!');
             } else {
                 await createUser(userData);
+                toast.success('Usuário criado com sucesso!');
             }
             handleCloseModal();
             fetchUsers();
         } catch (err) {
             console.error('Falha ao salvar usuário:', err);
-            fetchUsers();
-            setError('Erro ao salvar usuário. Tente novamente mais tarde.');
+            const errorMessage =
+                err.message || 'Erro ao salvar usuário. Tente novamente.';
+            toast.error(errorMessage);
         }
     };
 
     const handleDeleteUser = async (userId) => {
-        if (window.confirm('Tem certeza que deseja excluir este usuário?')) {
-            try {
-                await deleteUser(userId);
-                setUsers((prevUsers) =>
-                    prevUsers.filter((user) => user.id !== userId)
-                );
-                alert('Usuário excluído com sucesso.');
-            } catch (error) {
-                setError(
-                    'Erro ao excluir usuário. Tente novamente mais tarde.'
-                );
-                console.error(error);
-            }
+        setUserToDelete(userId);
+        setIsConfirmModalOpen(true);
+    };
+
+    const handleConfirmDelete = async () => {
+        if (!userToDelete) return;
+
+        try {
+            await deleteUser(userToDelete);
+            setUsers((prevUsers) =>
+                prevUsers.filter((user) => user.id !== userToDelete)
+            );
+            toast.success('Usuário excluído com sucesso.');
+        } catch (error) {
+            toast.error('Erro ao excluir usuário. Tente novamente mais tarde.');
+            console.error(error);
+        } finally {
+            setIsConfirmModalOpen(false);
+            setUserToDelete(null);
         }
     };
 
     return (
         <MainLayout>
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+            />
             <h1>Gerenciar Usuários</h1>
             <button
                 onClick={handleAddUser}
@@ -90,8 +109,7 @@ function ManageUsersPage() {
                 + Adicionar Usuário
             </button>
             {loading && <p>Carregando usuários...</p>}
-            {error && <p className="error-message">{error}</p>}
-            {!loading && !error && (
+            {!loading && (
                 <UserTable
                     users={users}
                     onEdit={handleEditUser}
@@ -106,6 +124,14 @@ function ManageUsersPage() {
                     onSave={handleSaveUser}
                 />
             )}
+
+            <ConfirmationModal
+                isOpen={isConfirmModalOpen}
+                onClose={() => setIsConfirmModalOpen(false)}
+                onConfirm={handleConfirmDelete}
+                title="Confirmar Exclusão"
+                message="Tem certeza que deseja excluir este usuário? Esta ação não pode ser desfeita."
+            />
         </MainLayout>
     );
 }

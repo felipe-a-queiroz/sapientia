@@ -115,8 +115,6 @@ button {
     color: #fff;
     box-shadow: 0 2px 8px 0 rgba(6, 182, 212, 0.1);
     cursor: pointer;
-    min-width: 120px;
-    min-height: 44px;
     letter-spacing: 0.02em;
     transition:
         background 0.2s,

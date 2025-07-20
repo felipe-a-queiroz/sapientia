@@ -77,4 +77,24 @@ export const deleteUser = async (userId) => {
     }
 };
 
+export const getProfile = async () => {
+    try {
+        const response = await api.get('/profile');
+        return response.data;
+    } catch (error) {
+        throw error.response?.data || { message: 'Erro ao buscar perfil.' };
+    }
+};
+
+export const updateProfile = async (profileData) => {
+    try {
+        const response = await api.put('/profile', profileData);
+        return response.data;
+    } catch (error) {
+        throw (
+            error.response?.data || { message: 'Erro ao atualizar o perfil.' }
+        );
+    }
+};
+
 export default api;

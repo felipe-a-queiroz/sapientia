@@ -1,15 +1,16 @@
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 import { useAuth } from '../../contexts/AuthContext';
 import { loginUser } from '../../api';
 import './LoginPage.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 import Input from '../../components/forms/Input';
 
 function LoginPage() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const { login } = useAuth();
     const navigate = useNavigate();
@@ -18,7 +19,6 @@ function LoginPage() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setError('');
         setIsLoading(true);
         try {
             const data = await loginUser({ username, password });
@@ -27,10 +27,10 @@ function LoginPage() {
                 login(data.token, data.user);
                 navigate(from, { replace: true });
             } else {
-                setError('Token ou dados do usuário não recebidos da API.');
+                toast.error('Token ou dados do usuário não recebidos da API.');
             }
         } catch (err) {
-            setError(
+            toast.error(
                 err.message || 'Falha no login. Verifique suas credenciais.'
             );
         } finally {
@@ -40,6 +40,11 @@ function LoginPage() {
 
     return (
         <div className="LoginPage-center">
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+            />
             <div className="AuthCard">
                 <h1 className="AuthCard-title">Sapientia</h1>
                 <p className="AuthCard-desc">Acesse sua conta para continuar</p>
@@ -66,7 +71,6 @@ function LoginPage() {
                         required
                         autoComplete="current-password"
                     />
-                    {error && <p className="LoginForm-error">{error}</p>}
                     <button
                         type="submit"
                         className="LoginForm-button"
