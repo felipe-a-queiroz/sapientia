@@ -21,7 +21,7 @@ api.interceptors.request.use(
 
 export const loginUser = async (credentials) => {
     try {
-        const response = await api.post('/login', credentials);
+        const response = await api.post('/auth/login', credentials);
         return response.data;
     } catch (error) {
         throw (
@@ -32,7 +32,7 @@ export const loginUser = async (credentials) => {
 
 export const logoutUser = async () => {
     try {
-        await api.post('/logout');
+        await api.post('/auth/logout');
     } catch (error) {
         throw (
             error.response?.data || {
