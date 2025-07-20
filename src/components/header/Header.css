@@ -53,3 +53,17 @@
     color: var(--color-text-on-primary);
     border-color: var(--color-primary);
 }
+
+.header-profile-link {
+    text-decoration: none;
+    color: var(--color-text-primary);
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-right: 30px;
+    cursor: pointer;
+    transition: text-decoration 0.2s;
+}
+
+.header-profile-link:hover {
+    text-decoration: underline;
+}
