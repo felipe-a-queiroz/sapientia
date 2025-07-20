@@ -4,7 +4,7 @@ import './ManageUsersPage.css';
 import MainLayout from '../../components/layout';
 import UserTable from '../../components/UserTable';
 import UserModal from '../../components/UserModal';
-import { getUsers, deleteUser, createUser, updateUser } from '../../api'; 
+import { getUsers, deleteUser, createUser, updateUser } from '../../api';
 
 function ManageUsersPage() {
     const [loading, setLoading] = useState(false);
@@ -15,30 +15,30 @@ function ManageUsersPage() {
     const [editingUser, setEditingUser] = useState(null);
 
     const fetchUsers = async () => {
-            setLoading(true);
-            setError(null);
-            try {
-                const data = await getUsers();
-                setUsers(data);
-            } catch (err) {
-                setError('Falha ao carregar usuários. Tente novamente mais tarde.');
-                console.error(err);
-            } finally {
-                setLoading(false);
-            }
-        };
+        setLoading(true);
+        setError(null);
+        try {
+            const data = await getUsers();
+            setUsers(data);
+        } catch (err) {
+            setError('Falha ao carregar usuários. Tente novamente mais tarde.');
+            console.error(err);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     useEffect(() => {
         fetchUsers();
     }, []);
 
     const handleAddUser = () => {
-        setEditingUser(null); 
+        setEditingUser(null);
         setIsModalOpen(true);
     };
 
     const handleEditUser = (user) => {
-        setEditingUser(user); 
+        setEditingUser(user);
         setIsModalOpen(true);
     };
 
@@ -55,10 +55,10 @@ function ManageUsersPage() {
                 await createUser(userData);
             }
             handleCloseModal();
-            fetchUsers(); 
+            fetchUsers();
         } catch (err) {
-            console.error("Falha ao salvar usuário:", err);
-            fetchUsers(); 
+            console.error('Falha ao salvar usuário:', err);
+            fetchUsers();
             setError('Erro ao salvar usuário. Tente novamente mais tarde.');
         }
     };
@@ -67,10 +67,14 @@ function ManageUsersPage() {
         if (window.confirm('Tem certeza que deseja excluir este usuário?')) {
             try {
                 await deleteUser(userId);
-                setUsers((prevUsers) => prevUsers.filter((user) => user.id !== userId));
+                setUsers((prevUsers) =>
+                    prevUsers.filter((user) => user.id !== userId)
+                );
                 alert('Usuário excluído com sucesso.');
             } catch (error) {
-                setError('Erro ao excluir usuário. Tente novamente mais tarde.');
+                setError(
+                    'Erro ao excluir usuário. Tente novamente mais tarde.'
+                );
                 console.error(error);
             }
         }
@@ -79,8 +83,11 @@ function ManageUsersPage() {
     return (
         <MainLayout>
             <h1>Gerenciar Usuários</h1>
-            <button onClick={handleAddUser} className="btn btn-primary add-user-button">
-                + Adicionar Usuário    
+            <button
+                onClick={handleAddUser}
+                className="btn btn-primary add-user-button"
+            >
+                + Adicionar Usuário
             </button>
             {loading && <p>Carregando usuários...</p>}
             {error && <p className="error-message">{error}</p>}

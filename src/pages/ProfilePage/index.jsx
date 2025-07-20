@@ -26,11 +26,14 @@ const ProfilePage = () => {
             }
 
             try {
-                const response = await fetch(`${import.meta.env.VITE_API_URL}/profile`, {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                });
+                const response = await fetch(
+                    `${import.meta.env.VITE_API_URL}/profile`,
+                    {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
+                    }
+                );
 
                 if (!response.ok) {
                     throw new Error('Falha ao carregar o perfil do usuário.');
@@ -70,19 +73,24 @@ const ProfilePage = () => {
         const token = localStorage.getItem('authToken');
 
         try {
-            const response = await fetch(`${import.meta.env.VITE_API_URL}/profile`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${token}`,
-                },
-                body: JSON.stringify(formData),
-            });
+            const response = await fetch(
+                `${import.meta.env.VITE_API_URL}/profile`,
+                {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${token}`,
+                    },
+                    body: JSON.stringify(formData),
+                }
+            );
 
             const result = await response.json();
 
             if (!response.ok) {
-                throw new Error(result.message || 'Falha ao atualizar o perfil.');
+                throw new Error(
+                    result.message || 'Falha ao atualizar o perfil.'
+                );
             }
 
             setProfile(result); // Atualiza o perfil com os novos dados da API
@@ -102,18 +110,24 @@ const ProfilePage = () => {
                 <h1>Perfil do Usuário</h1>
                 {loading && <p>Carregando perfil...</p>}
                 {error && <p className="error-message">Erro: {error}</p>}
-                {updateSuccess && <p className="success-message">{updateSuccess}</p>}
+                {updateSuccess && (
+                    <p className="success-message">{updateSuccess}</p>
+                )}
 
-                {profile && (
-                    !isEditing ? (
+                {profile &&
+                    (!isEditing ? (
                         <div className="profile-details">
                             <p>
-                                <strong>Nome de usuário:</strong> {profile.user.username}
+                                <strong>Nome de usuário:</strong>{' '}
+                                {profile.user.username}
                             </p>
                             <p>
                                 <strong>Email:</strong> {profile.user.email}
                             </p>
-                            <button onClick={() => setIsEditing(true)} className="edit-button">
+                            <button
+                                onClick={() => setIsEditing(true)}
+                                className="edit-button"
+                            >
                                 Editar Perfil
                             </button>
                         </div>
@@ -137,18 +151,30 @@ const ProfilePage = () => {
                                 onChange={handleInputChange}
                                 disabled={updateLoading}
                             />
-                            {updateError && <p className="error-message">{updateError}</p>}
+                            {updateError && (
+                                <p className="error-message">{updateError}</p>
+                            )}
                             <div className="form-actions">
-                                <button type="submit" disabled={updateLoading} className="save-button">
-                                    {updateLoading ? 'Salvando...' : 'Salvar Alterações'}
+                                <button
+                                    type="submit"
+                                    disabled={updateLoading}
+                                    className="save-button"
+                                >
+                                    {updateLoading
+                                        ? 'Salvando...'
+                                        : 'Salvar Alterações'}
                                 </button>
-                                <button type="button" onClick={handleCancelEdit} disabled={updateLoading} className="cancel-button">
+                                <button
+                                    type="button"
+                                    onClick={handleCancelEdit}
+                                    disabled={updateLoading}
+                                    className="cancel-button"
+                                >
                                     Cancelar
                                 </button>
                             </div>
                         </form>
-                    )
-                )}
+                    ))}
             </div>
         </MainLayout>
     );

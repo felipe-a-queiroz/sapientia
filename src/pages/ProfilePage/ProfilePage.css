@@ -1,4 +1,6 @@
-.save-button, .cancel-button, .edit-button {
+.save-button,
+.cancel-button,
+.edit-button {
     border: none;
     padding: 10px 20px;
     text-align: center;
