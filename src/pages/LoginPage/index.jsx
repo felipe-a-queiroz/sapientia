@@ -23,8 +23,8 @@ function LoginPage() {
         try {
             const data = await loginUser({ username, password });
             console.log('Login response:', data);
-            if (data.token && data.role) {
-                login(data.token, data.role);
+            if (data.token && data.user.role) {
+                login(data.token, data.user);
                 navigate(from, { replace: true });
             } else {
                 setError('Token ou dados do usuário não recebidos da API.');

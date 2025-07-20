@@ -10,11 +10,11 @@ export function AuthProvider({ children }) {
     // Efeito para carregar o usuário do localStorage na montagem do componente
     useEffect(() => {
         const storedToken = localStorage.getItem('authToken');
-        const storedRole = localStorage.getItem('role');
+        const storedUser = localStorage.getItem('user');
 
-        if (storedToken && storedRole) {
+        if (storedToken && storedUser) {
             // Aqui, você poderia adicionar uma verificação de expiração do token se necessário
-            setUser(JSON.parse(storedRole));
+            setUser(JSON.parse(storedUser));
         }
     }, []);
 
@@ -25,20 +25,20 @@ export function AuthProvider({ children }) {
      */
     const login = (token, userData) => {
         localStorage.setItem('authToken', token);
-        localStorage.setItem('role', JSON.stringify(userData));
+        localStorage.setItem('user', JSON.stringify(userData));
         setUser(userData);
     };
 
     const logout = () => {
         localStorage.removeItem('authToken');
-        localStorage.removeItem('role');
+        localStorage.removeItem('user');
 
         setUser(null);
     };
 
     // !!user converte o objeto do usuário (ou null) para um booleano.
     const value = {
-        user, // Contém a role do usuário (ex: 'admin')
+        user, // Contém os dados do usuário (id, username, email, role)
         isAuthenticated: !!user,
         login,
         logout,

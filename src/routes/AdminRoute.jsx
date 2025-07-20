@@ -17,5 +17,5 @@ export function AdminRoute() {
 
     // Se o usuário está logado, mas não é admin, redireciona para a home.
     // O <Outlet /> renderiza as rotas filhas (ex: /admin/users) se o usuário for admin.
-    return user === 'admin' ? <Outlet /> : <Navigate to="/" replace />;
+    return user?.role === 'admin' ? <Outlet /> : <Navigate to="/" replace />;
 }

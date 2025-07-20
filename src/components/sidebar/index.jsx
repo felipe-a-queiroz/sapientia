@@ -20,7 +20,7 @@ const Sidebar = () => {
                         </Link>
                     </li>
                     {/* Links que só aparecem para administradores */}
-                    {user === 'admin' && (
+                    {user?.role === 'admin' && (
                         <li className="sidebar-item">
                             <Link to="/admin/users" className="sidebar-link">
                                 Gerenciar Usuários

@@ -43,7 +43,6 @@ export function AppRoutes() {
                 />
                 <Route element={<AdminRoute />}>
                     <Route path="/admin/users" element={<ManageUsersPage />} />
-                    {/* Outras rotas de admin podem ser adicionadas aqui */}
                 </Route>
                 <Route
                     path="/settings"
