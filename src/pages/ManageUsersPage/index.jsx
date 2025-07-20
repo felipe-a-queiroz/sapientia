@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import './ManageUsersPage.css';
 
 import MainLayout from '../../components/layout';
-import UserTable from '../../components/userTable';
+import UserTable from '../../components/UserTable';
 import UserModal from '../../components/UserModal';
 import { getUsers, deleteUser, createUser, updateUser } from '../../api'; 
 
