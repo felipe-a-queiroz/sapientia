@@ -1,49 +1,33 @@
 import { useState, useEffect } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
 import MainLayout from '../../components/layout';
-import Input from '../../components/forms/Input'; // Reutilizando o componente de Input
+import Input from '../../components/forms/Input';
 import './ProfilePage.css';
+import 'react-toastify/dist/ReactToastify.css';
+import { getProfile, updateProfile } from '../../api';
+import { useAuth } from '../../contexts/AuthContext';
 
 const ProfilePage = () => {
+    const { updateUser } = useAuth();
     const [profile, setProfile] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState('');
 
     // Estados para o formulário de edição
     const [isEditing, setIsEditing] = useState(false);
     const [formData, setFormData] = useState({ username: '', email: '' });
     const [updateLoading, setUpdateLoading] = useState(false);
-    const [updateError, setUpdateError] = useState('');
-    const [updateSuccess, setUpdateSuccess] = useState('');
 
     useEffect(() => {
         const fetchProfile = async () => {
-            // O token é pego do localStorage, onde o AuthContext o armazena.
-            const token = localStorage.getItem('authToken');
-            if (!token) {
-                setError('Usuário não autenticado.');
-                setLoading(false);
-                return;
-            }
-
+            setLoading(true);
             try {
-                const response = await fetch(
-                    `${import.meta.env.VITE_API_URL}/profile`,
-                    {
-                        headers: {
-                            Authorization: `Bearer ${token}`,
-                        },
-                    }
-                );
-
-                if (!response.ok) {
-                    throw new Error('Falha ao carregar o perfil do usuário.');
-                }
-
-                const data = await response.json();
+                const data = await getProfile();
                 setProfile(data);
-                setFormData(data.user); // Preenche o formulário com os dados recebidos
+                setFormData(data.user);
             } catch (err) {
-                setError(err.message);
+                toast.error(
+                    err.message || 'Falha ao carregar o perfil do usuário.'
+                );
             } finally {
                 setLoading(false);
             }
@@ -60,45 +44,26 @@ const ProfilePage = () => {
     const handleCancelEdit = () => {
         setIsEditing(false);
         setFormData(profile.user); // Restaura os dados originais
-        setUpdateError('');
-        setUpdateSuccess('');
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setUpdateLoading(true);
-        setUpdateError('');
-        setUpdateSuccess('');
-
-        const token = localStorage.getItem('authToken');
-
         try {
-            const response = await fetch(
-                `${import.meta.env.VITE_API_URL}/profile`,
-                {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        Authorization: `Bearer ${token}`,
-                    },
-                    body: JSON.stringify(formData),
-                }
-            );
+            const result = await updateProfile(formData);
 
-            const result = await response.json();
-
-            if (!response.ok) {
-                throw new Error(
-                    result.message || 'Falha ao atualizar o perfil.'
-                );
-            }
-
-            setProfile(result); // Atualiza o perfil com os novos dados da API
+            // Atualiza o estado local da página
+            setProfile(result);
             setFormData(result.user);
+
+            // Atualiza o estado global do usuário na aplicação.
+            // O Header e qualquer outro componente que use `useAuth` será re-renderizado.
+            updateUser(result.user);
+
             setIsEditing(false);
-            setUpdateSuccess('Perfil atualizado com sucesso!');
+            toast.success('Perfil atualizado com sucesso!');
         } catch (err) {
-            setUpdateError(err.message);
+            toast.error(err.message);
         } finally {
             setUpdateLoading(false);
         }
@@ -106,13 +71,14 @@ const ProfilePage = () => {
 
     return (
         <MainLayout>
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+            />
             <div className="profile-page">
                 <h1>Perfil do Usuário</h1>
                 {loading && <p>Carregando perfil...</p>}
-                {error && <p className="error-message">Erro: {error}</p>}
-                {updateSuccess && (
-                    <p className="success-message">{updateSuccess}</p>
-                )}
 
                 {profile &&
                     (!isEditing ? (
@@ -151,9 +117,6 @@ const ProfilePage = () => {
                                 onChange={handleInputChange}
                                 disabled={updateLoading}
                             />
-                            {updateError && (
-                                <p className="error-message">{updateError}</p>
-                            )}
                             <div className="form-actions">
                                 <button
                                     type="submit"

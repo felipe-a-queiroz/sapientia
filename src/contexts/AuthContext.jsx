@@ -36,12 +36,20 @@ export function AuthProvider({ children }) {
         setUser(null);
     };
 
+    const updateUser = (newUserData) => {
+        // Atualiza o objeto do usuário no estado e no localStorage.
+        // Isso garante que componentes como o Header reflitam a mudança.
+        localStorage.setItem('user', JSON.stringify(newUserData));
+        setUser(newUserData);
+    };
+
     // !!user converte o objeto do usuário (ou null) para um booleano.
     const value = {
         user, // Contém os dados do usuário (id, username, email, role)
         isAuthenticated: !!user,
         login,
         logout,
+        updateUser,
     };
 
     return (
